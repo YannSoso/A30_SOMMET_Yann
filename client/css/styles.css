@@ -1,0 +1,412 @@
+/* 
+  Auteur : Yann Sommet
+  Date :   16.06.2023 / V2.0
+  Description : CSS
+*/
+
+* {
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+
+body {
+  background-color: #82c4e9; /* Nouvelle couleur de fond */
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 30%;
+  height: auto;
+}
+
+.containerTitre {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #014b7c; /* Nouvelle couleur de fond */
+  background-position: center center;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+
+.titre {
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+#containerEau {
+  display: flex;
+  justify-content: center;
+}
+
+#containerEauGauche,
+#containerEauDroite {
+  margin: 10px;
+}
+
+.eauDiv {
+  text-align: center;
+  margin: 10px;
+}
+
+.eauDiv img {
+  width: 100%;
+  display: block;
+}
+
+.eauDiv p {
+  display: none;
+}
+
+.eauDiv.agrandi p {
+  display: block;
+}
+
+.containerEau {
+  margin: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerEauMarque {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5%;
+  padding: 5%;
+  background: #fff; /* Nouvelle couleur de fond */
+  border-radius: 50px;
+  width: 40%;
+}
+
+.containerEauMarque:hover {
+  background: #d3d3d3; /* Nouvelle couleur de fond au survol */
+}
+
+.eauDiv img {
+  width: auto;
+  height: 300px;
+}
+
+footer {
+  background-color: #f2f2f2;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left,
+.center,
+.right {
+  flex: 1;
+}
+
+.login {
+  padding: 15px;
+  width: 40%;
+  min-height: 300px;
+  margin: 2% auto 10% auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.input-group-addon {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.float {
+  width: 100%;
+  padding: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.float:hover {
+  background-color: #2980b9;
+}
+
+.containerTitre {
+  background-image: #2980b9; /* Nouvelle couleur de fond */
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px 4px 0 0;
+}
+
+.titre {
+  margin: 0;
+}
+
+.conteneurImage {
+  margin-top: 20px;
+  text-align: center;
+}s
+
+.imgEau {
+  max-width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.containerInfosEau {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #ecf0f1;
+  border-radius: 0 0 4px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.commentaireEau {
+  margin: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.float {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.float:hover {
+  background-color: #2980b9;
+}
+#login{
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+/* Ajout de styles pour aligner le bouton à droite */
+.header  .boutonLogin{
+  margin-left: auto;
+}
+
+#home2, #home1{
+  width: 30px; /* Ajuster la taille de l'icône selon vos besoins */
+  height: 30px;
+  display: block;
+  margin-left: auto; /* Pour aligner l'icône à droite */
+  margin-right: 20px; /* Ajouter une marge à droite pour l'espacement */
+}
+
+.hommeBtn {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.divImgEau{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.divImgEau img {
+  width: auto;
+  height: 300px;
+}
+
+#ajouterEau {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#ajouterEau h2 {
+  text-align: center;
+  color: #2980b9;
+}
+
+#ajouterEau input,
+#ajouterEau textarea {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#ajouterEau button {
+  width: 100%;
+  padding: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#ajouterEau button:hover {
+  background-color: #2980b9;
+}
+
+/* Ajoutez ces styles dans votre feuille de style CSS */
+
+.hidden {
+  display: none;
+}
+
+#DivAjouterEau {
+  background-color: #f0f0f0; /* Gris clair */
+  color: #333; /* Gris foncé */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+#DivAjouterEau h2 {
+  color: #3498db; /* Bleu clair */
+}
+
+#nomAjouter, #descriptionAjouter {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc; /* Gris clair pour la bordure */
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+#ajouterEau {
+  background-color: #3498db; /* Bleu clair pour le bouton */
+  color: #fff; /* Blanc pour le texte du bouton */
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#ajouterEau:hover {
+  background-color: #2980b9; /* Bleu légèrement plus foncé au survol */
+}
+
+#ajouterCommentaire {
+  background-color: #f5f5f5; /* Gris clair pour le fond */
+  border: 1px solid #ccc; /* Bordure grise */
+  border-radius: 8px; /* Coins arrondis */
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#ajoutCommentaire {
+  flex: 1; /* Prend autant d'espace que possible */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#ajoutCommentaireBtn {
+  background-color: #3498db; /* Bleu pour le bouton */
+  color: #fff; /* Texte blanc */
+  padding: 8px 16px; /* Marge interne du bouton */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Animation de transition au survol */
+}
+
+#ajoutCommentaireBtn:hover {
+  background-color: #2980b9; /* Bleu légèrement plus foncé au survol */
+}
+
+.commentaireEau {
+  background-color: #f5f5f5; /* Gris clair pour le fond */
+  border: 1px solid #ccc; /* Bordure grise */
+  border-radius: 8px; /* Coins arrondis */
+  margin-bottom: 15px; /* Marge en bas */
+  padding: 10px;
+  display: flex;
+  flex-direction: column; /* Affiche les éléments en colonne */
+}
+
+.clicParagraphe {
+  margin-bottom: 10px; /* Marge en bas du paragraphe */
+}
+
+.commentaireInput, .modifierBtn, .effacerBtn {
+  margin-top: 10px; /* Marge en haut pour les éléments suivants */
+}
+
+.commentaireInput {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modifierBtn, .effacerBtn {
+  background-color: #3498db; /* Bleu pour les boutons */
+  color: #fff; /* Texte blanc */
+  padding: 8px 16px; /* Marge interne des boutons */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Animation de transition au survol */
+}
+
+.modifierBtn:hover, .effacerBtn:hover {
+  background-color: #2980b9; /* Bleu légèrement plus foncé au survol */
+}
