@@ -39,8 +39,8 @@ class AccueilCtrl {
 
     if (files.length > 0) {
         var item = document.createElement('div');
-        item.setAttribute('data-idx', 0); // Utiliser 0 pour la première image
-        var file = files[0]; // Utiliser le premier fichier sélectionné
+        item.setAttribute('data-idx', 0); 
+        var file = files[0]; 
 
         var reader = new FileReader();
         reader.addEventListener('load', this.getReadFile(reader, 0, file).bind(this));
