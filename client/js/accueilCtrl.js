@@ -14,21 +14,53 @@ class AccueilCtrl {
       indexCtrl.loadLogin();
     });
 
-    $("#ajouterEau").click(() => {
-        var nomEau = document.getElementById('nomAjouter').value;
-        var description = document.getElementById('descriptionAjouter').value;
-        this.wrk = new HttpService();
-        this.wrk.addEau(nomEau, description, this.ajouterEau.bind(this),(error) => {
-          if (error.unauthorized === true) {
-              alert("Vous n'avez pas les droits pour ajouter une eau");
-          } else {
-              alert("Une erreur s'est produite lors de la mise à jour du commentaire : " + error.message);
-          }
-        });
-      });
+    $("#fileChooser").on("change", this.readFiles.bind(this));
 
-    
+    $("#ajouterEau").click(() => {
+      var nomEau = document.getElementById('nomAjouter').value;
+      var description = document.getElementById('descriptionAjouter').value;
+      this.wrk = new HttpService();
+      this.wrk.addEau(nomEau, description, this.ajouterEau.bind(this), (error) => {
+        if (error.unauthorized === true) {
+          alert("Vous n'avez pas les droits pour ajouter une eau");
+        } else {
+          alert("Une erreur s'est produite lors de la mise à jour du commentaire : " + error.message);
+        }
+      });
+    });
+
+
   }
+
+  readFiles() {
+    var files = document.getElementById('fileChooser').files;
+    var target = document.getElementById('target');
+    target.innerHTML = '';
+
+    if (files.length > 0) {
+        var item = document.createElement('div');
+        item.setAttribute('data-idx', 0); // Utiliser 0 pour la première image
+        var file = files[0]; // Utiliser le premier fichier sélectionné
+
+        var reader = new FileReader();
+        reader.addEventListener('load', this.getReadFile(reader, 0, file).bind(this));
+        reader.readAsDataURL(file);
+
+        target.appendChild(item);
+    }
+}
+
+getReadFile(reader, index, file) {
+    return function () {
+        var div = document.querySelector('[data-idx="' + index + '"]');
+
+        if (file.type === 'image/png') {
+            var img = document.createElement('img');
+            img.src = reader.result;
+            div.appendChild(img);
+        }
+    }
+}
 
 
   afficherAccueil(data) {
@@ -83,4 +115,5 @@ class AccueilCtrl {
       alert("L'eau n'a pas pu etre ajouté");
     }
   }
+
 }

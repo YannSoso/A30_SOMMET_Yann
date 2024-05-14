@@ -7,6 +7,8 @@
 
 <!-- Entête de la page avec image centré-->
 <div class="header">
+    <img id="logo" src="img/logo.png" alt="Logo de notre entreprise">
+
     <button class="boutonLogin" id="login">Login</button>
 </div>
 
@@ -26,6 +28,13 @@
         <!-- Champ pour la description -->
         <textarea id="descriptionAjouter" placeholder='Description'></textarea>
     
+        <!-- Champ pour le fileChooser-->
+        <button class="btn-file">
+            Choose a file to read <input type="file" accept=".png" id="fileChooser" multiple>
+        </button>
+
+        <div id="target"></div>
+
         <!-- Bouton "Ajouter Eau" -->
         <button id='ajouterEau'>Ajouter Eau</button>
     </div>

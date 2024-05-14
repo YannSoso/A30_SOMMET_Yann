@@ -19,6 +19,14 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+
+#logo, #logo1, #logo2 {
+  position: absolute;
+  width: 5%; 
+  height: auto; 
 }
 
 .logo {
@@ -211,7 +219,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 10px;
 }
 
 .float {
@@ -410,3 +418,4 @@ footer {
 .modifierBtn:hover, .effacerBtn:hover {
   background-color: #2980b9; /* Bleu légèrement plus foncé au survol */
 }
+
