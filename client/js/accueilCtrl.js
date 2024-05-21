@@ -29,9 +29,18 @@ class AccueilCtrl {
       });
     });
 
+    $("#getStream").click(() => {
+      var baliseVideo = `    <p><video autoplay id="videoPhoto" style="height: 300px; width: 200px;"></video></p>
+      <p><button class="btnAjout">Take Photo!</button></p>`;
+      $('#containerPhoto').html(baliseVideo);
+      var containerImg = `<p><img id="imageTag" width="200px" height="300px"></p>`;
+      $('#target').html(containerImg);
+
+    });
 
   }
 
+  
   readFiles() {
     var files = document.getElementById('fileChooser').files;
     var target = document.getElementById('target');
