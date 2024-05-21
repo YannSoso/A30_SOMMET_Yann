@@ -356,18 +356,31 @@ footer {
   border-radius: 8px; /* Coins arrondis */
   padding: 10px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#ajouterCommentaire, #commentaireVideo{
+  display: flex;
+  flex-direction: column;
+}
+
+.addCommentaire {
+  display: flex;
+  justify-content: center; 
   align-items: center;
+  width: 100%;
+  gap: 10px;
 }
 
 #ajoutCommentaire {
   flex: 1; /* Prend autant d'espace que possible */
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 4px; 
 }
 
-#ajoutCommentaireBtn {
+.btnAjout {
   background-color: #3498db; 
   color: #fff; 
   padding: 8px 16px; 
@@ -377,7 +390,8 @@ footer {
   transition: background-color 0.3s ease;
 }
 
-#ajoutCommentaireBtn:hover {
+
+.btnAjout:hover {
   background-color: #2980b9; 
 }
 

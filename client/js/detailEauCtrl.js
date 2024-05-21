@@ -29,6 +29,28 @@ class DetailEau {
             }
         });
 
+        $("#ajoutCommentaireVideo").click(() => {
+            var videoHtml = `
+            <video id="videoPlayer" autoplay style="height:250px; width: 200px;" poster="https://image.freepik.com/free-icon/video-camera-symbol_318-40225.png"></video>
+            <p><button class="btnAjout" id="recordVideo">Record video</button></p>
+            <p><button class="btnAjout" id="sendVideo">Send video</button></p>
+            `;
+
+            $('#commentaireVideo').html(videoHtml);
+
+            $('#recordVideo').click(() => {
+                this.getStream();
+            });
+
+            $('#sendVideo').click(() => {
+                this.download();
+            });
+        });
+        
+        this.theStream1 = null;
+        this.theRecorder = null;
+        this.recordedChunks = [];
+
         // Afficher l'image dans la balise imgEau
         if (image !== null) {
             $("#imgEau").attr('src', 'data:image/jpeg;base64,' + image);
@@ -142,6 +164,64 @@ class DetailEau {
         } else {
             alert("Le commentaire n'a pas pu etre ajouté");
         }
+    }
+
+    getStream() {
+        if (!navigator.mediaDevices.getUserMedia) {
+            alert('User Media API not supported.');
+            return;
+        }
+
+        var constraints = { video: true, audio: true };
+        navigator.mediaDevices.getUserMedia(constraints)
+        .then((stream) => {
+            var mediaControl = document.getElementById('videoPlayer');
+
+            if ('srcObject' in mediaControl) {
+                mediaControl.srcObject = stream;
+            } else {
+                mediaControl.src = URL.createObjectURL(stream);
+            }
+
+            this.theStream1 = stream;
+            try {
+                this.theRecorder = new MediaRecorder(stream, { mimeType: "video/webm" });
+            } catch (e) {
+                console.error('Exception while creating MediaRecorder: ' + e);
+                return;
+            }
+            console.log('MediaRecorder created');
+            this.theRecorder.ondataavailable = this.recorderOnDataAvailable.bind(this);
+            this.theRecorder.start(100);
+        })
+        .catch((err) => {
+            alert('Error: ' + err);
+        });
+    }
+
+    recorderOnDataAvailable(event) {
+        if (event.data.size == 0) return;
+        this.recordedChunks.push(event.data);
+    }
+
+    download() {
+        console.log('Saving data');
+        this.theRecorder.stop();
+        this.theStream1.getTracks().forEach(track => track.stop());
+
+        var blob = new Blob(this.recordedChunks, { type: "video/webm" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+        a.href = url;
+        a.download = 'test.webm';
+        a.click();
+
+        // setTimeout() here is needed for Firefox.
+        setTimeout(function () {
+            URL.revokeObjectURL(url);
+        }, 100);
     }
 
 }

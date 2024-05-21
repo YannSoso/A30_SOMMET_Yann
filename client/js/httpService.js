@@ -1,5 +1,5 @@
-var BASE_URL = "http://localhost/A30_SOMMET_YANN/server/controllers/";
-//var BASE_URL = "https://sommety.emf-informatique.ch/151/projet/server/controllers/";
+//var BASE_URL = "http://localhost/A30_SOMMET_YANN/server/controllers/";
+var BASE_URL = "https://sommety.emf-informatique.ch/151/projet/server/controllers/";
 /*
  *  Date :   16.06.2023 / V3.0
  * @author Jean-Claude Stritt / modif Yann Sommet
