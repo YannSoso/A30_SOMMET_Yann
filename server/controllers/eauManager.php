@@ -46,9 +46,6 @@ if (isset($_POST["action"]) && $_POST['action'] == "addEau") {
 
     if (isset($_POST['nomEau'], $_SESSION['estAdmin'], $_POST['image'])) {
         if ($_SESSION['estAdmin'] == 1) {
-            if(!isset($_POST['description'])){
-                $_POST['description'] = null;
-            }
             $return = $wrk->addEau($_POST['nomEau'], $_POST['description'], $_POST['image']);
             if ($return !== null) {
                 http_response_code(201);

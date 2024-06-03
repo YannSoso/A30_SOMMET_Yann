@@ -70,18 +70,27 @@ if (isset($_GET['action']) && $_GET['action'] == "getAll") {
  * Ajoute le commentaire à la base de données si la requête vient d'un utilisateur
  */
 if (isset($_POST['action']) && $_POST['action'] == "addCommentaire") {
+    if (isset($_POST['pfkEau'], $_SESSION['pkUser']) && (isset($_POST['commentaire']) || isset($_POST['video']))) {
+        // Initialisation de la variable de retour
+        $return = null;
 
-    if (isset($_POST['pfkEau'], $_SESSION['user']) && (isset($_POST['commentaire'])||isset($_POST['video']))) {
+        // Cas où il y a une vidéo à ajouter
         if (isset($_POST['video'])) {
             $return = $wrkCommentaire->addCommentaireVideo($_POST['video'], $_POST['pfkEau'], $_SESSION['pkUser']);
-        } else if (isset($_POST['commentaire'])){
+        } 
+        // Cas où il y a un commentaire à ajouter
+        else if (isset($_POST['commentaire'])) {
             $return = $wrkCommentaire->addCommentaire($_POST['commentaire'], $_POST['pfkEau'], $_SESSION['pkUser']);
-        }else if (isset($_POST['commentaire']) && isset($_POST['video'])){
+        } 
+        // Cas où il y a à la fois une vidéo et un commentaire à ajouter
+        else if (isset($_POST['commentaire']) && isset($_POST['video'])) {
             $return = $wrkCommentaire->addCommentaireVideo($_POST['video'], $_POST['pfkEau'], $_SESSION['pkUser']);
             if ($return !== null) {
                 $return = $wrkCommentaire->addCommentaire($_POST['commentaire'], $_POST['pfkEau'], $_SESSION['pkUser']);
             }
         }
+
+        // Vérification du résultat des opérations d'ajout
         if ($return !== null) {
             http_response_code(201);
             echo json_encode(['success' => true]);

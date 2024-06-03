@@ -43,7 +43,8 @@ class DetailEau {
             });
 
             $('#sendVideo').click(() => {
-                this.send();
+                var valeurCom = document.getElementById('ajoutCommentaire').value;
+                this.send(idEau, valeurCom);
             });
         });
 
@@ -76,22 +77,14 @@ class DetailEau {
         if (data && data.length > 0) {
             data.forEach(commentaire => {
                 const idCommentaire = commentaire.pk_Commentaire;
-                if (commentaire.video !== null) {
-                    commentaireDiv = $("<div class='commentaireEau' id='" + idCommentaire + "Commentaire'>" +
-                        "<p class='clicParagraphe'>" + commentaire.commentaire + "</p>" +
-                        "<input type='text' class='commentaireInput hidden' id='" + idCommentaire + "Input' value='" + commentaire.commentaire + "'/>" +
-                        "<video width='320' height='240' controls> <source src='data:video/webm;base64," + commentaire.video + "' type='video/webm'> </video>" +
-                        "<button class='modifierBtn hidden' id='" + idCommentaire + "BtnModifier'>Modifier Commentaire</button>" +
-                        "<button class='effacerBtn hidden' id='" + idCommentaire + "BtnEffacer' data-commentaire-id='" + idCommentaire + "'>Effacer Commentaire</button>" +
-                        "</div>");
-                } else {
-                    commentaireDiv = $("<div class='commentaireEau' id='" + idCommentaire + "Commentaire'>" +
-                        "<p class='clicParagraphe'>" + commentaire.commentaire + "</p>" +
-                        "<input type='text' class='commentaireInput hidden' id='" + idCommentaire + "Input' value='" + commentaire.commentaire + "'/>" +
-                        "<button class='modifierBtn hidden' id='" + idCommentaire + "BtnModifier'>Modifier Commentaire</button>" +
-                        "<button class='effacerBtn hidden' id='" + idCommentaire + "BtnEffacer' data-commentaire-id='" + idCommentaire + "'>Effacer Commentaire</button>" +
-                        "</div>");
-                }
+                const commentaireDiv = $("<div class='commentaireEau' id='" + idCommentaire + "Commentaire'>" +
+                    "<p class='clicParagraphe'>" + commentaire.commentaire + "</p>" +
+                    "<input type='text' class='commentaireInput hidden' id='" + idCommentaire + "Input' value='" + commentaire.commentaire + "'/>" +
+                    "<video width='320' height='240' controls> <source src='data:video/webm;base64," + commentaire.video + "' type='video/webm'> </video>" +
+                    "<button class='modifierBtn hidden' id='" + idCommentaire + "BtnModifier'>Modifier Commentaire</button>" +
+                    "<button class='effacerBtn hidden' id='" + idCommentaire + "BtnEffacer' data-commentaire-id='" + idCommentaire + "'>Effacer Commentaire</button>" +
+                    "</div>");
+
 
 
                 containerCommentaireEau.append(commentaireDiv);
@@ -215,16 +208,16 @@ class DetailEau {
         this.recordedChunks.push(event.data);
     }
 
-    send() {
+    send(idEau, valeurCom) {
         console.log('Saving data');
         this.theRecorder.stop();
         this.theStream1.getTracks().forEach(track => track.stop());
-    
+
         var blob = new Blob(this.recordedChunks, { type: "video/webm" });
-    
+
         var reader = new FileReader();
-        reader.onloadend = function() {
-            var base64data = reader.result;
+            var base64data = event.target.result;
+            // Enregistrer le commentaire avec la vidéo et la valeur base64 dans la base de données
             var valeurCom = document.getElementById('ajoutCommentaire').value;
             this.wrk.addCommentaire(idEau, valeurCom, base64data, this.ajouterCommentaire.bind(this), (error) => {
                 if (error.unauthorized === true) {
@@ -233,9 +226,5 @@ class DetailEau {
                     alert("Une erreur s'est produite lors de la mise à jour du commentaire : " + error.message);
                 }
             });
-        };
     }
-
-
-
 }

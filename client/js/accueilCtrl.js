@@ -24,12 +24,12 @@ class AccueilCtrl {
         var img = canvas.toDataURL("image/png");
         this.wrk = new HttpService();
         this.wrk.addEau(nomEau, description, img, this.ajouterEau.bind(this), (error) => {
-         if (error.unauthorized === true) {
-           alert("Vous n'avez pas les droits pour ajouter une eau");
+          if (error.unauthorized === true) {
+            alert("Vous n'avez pas les droits pour ajouter une eau");
           } else {
             alert("Une erreur s'est produite lors de la mise à jour du commentaire : " + error.message);
-         }
-       });
+          }
+        });
       });
     });
 
@@ -44,36 +44,36 @@ class AccueilCtrl {
 
   }
 
-  
+
   readFiles() {
-      var files = document.getElementById('fileChooser').files;
-      var target = document.getElementById('target');
-      target.innerHTML = '';
-  
-      if (files.length > 0) {
-          var file = files[0]; 
-  
-          var reader = new FileReader();
-          reader.addEventListener('load', () => {
-              var img = document.createElement('img');
-              img.src = reader.result;
-              target.appendChild(img);
-          });
-          reader.readAsDataURL(file);
-      }
-}
+    var files = document.getElementById('fileChooser').files;
+    var target = document.getElementById('target');
+    target.innerHTML = '';
 
-getReadFile(reader, index, file) {
-    return function () {
-        var div = document.querySelector('target');
+    if (files.length > 0) {
+      var file = files[0];
 
-        if (file.type === 'image/png') {
-            var img = document.createElement('img');
-            img.src = reader.result;
-            div.appendChild(img);
-        }
+      var reader = new FileReader();
+      reader.addEventListener('load', () => {
+        var img = document.createElement('img');
+        img.src = reader.result;
+        target.appendChild(img);
+      });
+      reader.readAsDataURL(file);
     }
-}
+  }
+
+  getReadFile(reader, index, file) {
+    return function () {
+      var div = document.querySelector('target');
+
+      if (file.type === 'image/png') {
+        var img = document.createElement('img');
+        img.src = reader.result;
+        div.appendChild(img);
+      }
+    }
+  }
 
 
   afficherAccueil(data) {
