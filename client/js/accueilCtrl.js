@@ -19,13 +19,17 @@ class AccueilCtrl {
     $("#ajouterEau").click(() => {
       var nomEau = document.getElementById('nomAjouter').value;
       var description = document.getElementById('descriptionAjouter').value;
-      this.wrk = new HttpService();
-      this.wrk.addEau(nomEau, description, this.ajouterEau.bind(this), (error) => {
-        if (error.unauthorized === true) {
-          alert("Vous n'avez pas les droits pour ajouter une eau");
-        } else {
-          alert("Une erreur s'est produite lors de la mise à jour du commentaire : " + error.message);
-        }
+
+      html2canvas(document.querySelector("#target")).then(canvas => {
+        var img = canvas.toDataURL("image/png");
+        this.wrk = new HttpService();
+        this.wrk.addEau(nomEau, description, img, this.ajouterEau.bind(this), (error) => {
+         if (error.unauthorized === true) {
+           alert("Vous n'avez pas les droits pour ajouter une eau");
+          } else {
+            alert("Une erreur s'est produite lors de la mise à jour du commentaire : " + error.message);
+         }
+       });
       });
     });
 
@@ -42,26 +46,26 @@ class AccueilCtrl {
 
   
   readFiles() {
-    var files = document.getElementById('fileChooser').files;
-    var target = document.getElementById('target');
-    target.innerHTML = '';
-
-    if (files.length > 0) {
-        var item = document.createElement('div');
-        item.setAttribute('data-idx', 0); 
-        var file = files[0]; 
-
-        var reader = new FileReader();
-        reader.addEventListener('load', this.getReadFile(reader, 0, file).bind(this));
-        reader.readAsDataURL(file);
-
-        target.appendChild(item);
-    }
+      var files = document.getElementById('fileChooser').files;
+      var target = document.getElementById('target');
+      target.innerHTML = '';
+  
+      if (files.length > 0) {
+          var file = files[0]; 
+  
+          var reader = new FileReader();
+          reader.addEventListener('load', () => {
+              var img = document.createElement('img');
+              img.src = reader.result;
+              target.appendChild(img);
+          });
+          reader.readAsDataURL(file);
+      }
 }
 
 getReadFile(reader, index, file) {
     return function () {
-        var div = document.querySelector('[data-idx="' + index + '"]');
+        var div = document.querySelector('target');
 
         if (file.type === 'image/png') {
             var img = document.createElement('img');

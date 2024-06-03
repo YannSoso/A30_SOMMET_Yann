@@ -31,12 +31,12 @@ class HttpService {
     });
   }
 
-  addEau(nomEau, description, successCallback, errorCallback) {
+  addEau(nomEau, description, image, successCallback, errorCallback) {
     $.ajax({
       type: "POST",
       dataType: "json",
       url: BASE_URL + "eauManager.php",
-      data: 'action=addEau&nomEau=' + nomEau + '&description=' + description,
+      data: 'action=addEau&nomEau=' + nomEau + '&description=' + description + '&image=' + image,
       success: successCallback,
       error: function(xhr, status, error) {
         if (xhr.status === 401) {
@@ -100,12 +100,12 @@ class HttpService {
     });
   }
 
-  addCommentaire(pkEau, commentaire, successCallback, errorCallback) {
+  addCommentaire(pkEau, commentaire, video, successCallback, errorCallback) {
     $.ajax({
       type: "POST",
       dataType: "json",
       url: BASE_URL + "commentaireManager.php",
-      data: 'action=addCommentaire&commentaire=' + commentaire + '&pfkEau=' + pkEau,
+      data: 'action=addCommentaire&commentaire=' + commentaire + '&pfkEau=' + pkEau+ '&video=' + video,
       success: successCallback,
       error: function(xhr, status, error) {
         if (xhr.status === 401) {

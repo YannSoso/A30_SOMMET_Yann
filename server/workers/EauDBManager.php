@@ -8,10 +8,11 @@
  * @author Yann Sommet
  */
 
-include_once("../beans/Eau.php");
-include_once("connexion.php");
+include_once ("../beans/Eau.php");
+include_once ("connexion.php");
 
-class EauDBManager{
+class EauDBManager
+{
 
     /**
      * Ajoute une eau dans la base de données (sans image).
@@ -20,11 +21,17 @@ class EauDBManager{
      * @param string $description La description de l'eau à ajouter
      * @return int|false Le nombre de lignes affectées par la requête ou false en cas d'erreur
      */
-    public function addEau($nom, $description){
-        $query = "INSERT INTO t_eau (PK_eau, nom, description) values(NULL, :eau, :descr)";
-        $params = array('eau' => htmlspecialchars($nom), 'descr'=> htmlspecialchars($description));
-        $res = connexion::getInstance()->ExecuteQuery($query, $params);
-        return $res;
+    public function addEau($nom, $description, $image)
+    {
+            $query = "INSERT INTO t_eau (PK_eau, nom, description, image) values(NULL, :eau, :descr, :image)";
+            $encodedImage = base64_encode($image);
+            $base64DataWithHeader = "data:image/png;base64," . $encodedImage;
+            $params = array('eau' => htmlspecialchars($nom), 'descr' => htmlspecialchars($description), 'image' => $base64DataWithHeader);
+            var_dump($params);
+            print_r($query);
+            $res = connexion::getInstance()->ExecuteQuery($query, $params);
+            var_dump($res);
+            return $res;
     }
 
     /**
@@ -33,7 +40,8 @@ class EauDBManager{
      * @param int $pkEau La clé primaire de l'eau à supprimer
      * @return int|false Le nombre de lignes affectées par la requête ou false en cas d'erreur
      */
-    public function deleteEau($pkEau){
+    public function deleteEau($pkEau)
+    {
         $query = "DELETE from t_eau where PK_eau = :pkEau";
         $params = array('pkEau' => htmlspecialchars($pkEau));
         $res = connexion::getInstance()->ExecuteQuery($query, $params);
@@ -45,14 +53,15 @@ class EauDBManager{
      *
      * @return string|null La liste des eaux au format JSON ou null en cas d'erreur
      */
-    public function getAll(){
+    public function getAll()
+    {
         $liste = array();
 
         $query = connexion::getInstance()->SelectQuery("SELECT * FROM t_eau", null);
         foreach ($query as $row) {
-            if(isset($row["image"])){
+            if (isset($row["image"])) {
                 $imageBase64 = base64_encode($row['image']);
-            }else{
+            } else {
                 $imageBase64 = null;
             }
 

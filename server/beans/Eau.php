@@ -51,6 +51,7 @@ class Eau implements JsonSerializable
         $this->image = $image;
         $this->nom = $nom;
         $this->description = $description;
+
     }
 
     /**

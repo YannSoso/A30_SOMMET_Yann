@@ -32,6 +32,23 @@ class CommentaireDBManager
     }
 
     /**
+     * Ajoute un commentaire vidéo dans la base de données
+     *
+     * @param byte[] $video La vidéo du commentaire
+     * @param int $pfkEau La clé étrangère de l'eau associée au commentaire
+     * @param int $pfkUser La clé étrangère de l'utilisateur qui a posté le commentaire
+     * @return bool Retourne true si l'ajout est réussi, sinon false
+     */
+    public function addCommentaireVideo($video, $pfkEau, $pfkUser)
+    {
+        $query = "INSERT INTO tr_eau_user (PK_commentaire, PFK_eau, PFK_user, video) VALUES (NULL, :PFK_eau, :PFK_user, :vid)";
+        $encodedVideo = base64_encode($video);
+        $params = array('PFK_eau' => htmlspecialchars($pfkEau), 'PFK_user' => htmlspecialchars($pfkUser), 'vid' => htmlspecialchars($encodedVideo));
+        $res = connexion::getInstance()->executeQuery($query, $params);
+        return $res;
+    }
+
+    /**
      * Supprime un commentaire de la base de données si l'utilisateur a les autorisations nécessaires
      *
      * @param int $pkCommentaire La clé primaire du commentaire à supprimer
@@ -61,7 +78,7 @@ class CommentaireDBManager
 
         $query = connexion::getInstance()->selectQuery("SELECT * FROM tr_eau_user WHERE PFK_eau = :pfk_eau", array('pfk_eau' => htmlspecialchars($pfkEau)));
         foreach ($query as $row) {
-            $commentaire = new Commentaire($row['PK_commentaire'], $row['PFK_eau'], $row['PFK_user'], $row['commentaire']);
+            $commentaire = new Commentaire($row['PK_commentaire'], $row['PFK_eau'], $row['PFK_user'], $row['commentaire'], $row['video']);
             array_push($liste, $commentaire);
         }
 
@@ -82,6 +99,26 @@ class CommentaireDBManager
         if ($this->checkModifOK($pkCommentaire) == true) {
             $query = "UPDATE tr_eau_user SET commentaire = :com WHERE PK_commentaire = :pk";
             $params = array('com' => htmlspecialchars($commentaire), 'pk' => htmlspecialchars($pkCommentaire));
+            $res = connexion::getInstance()->executeQuery($query, $params);
+        }
+        return $res;
+    }
+
+    /**
+     * Met à jour le lien de la vidéo d'un commentaire dans la base de données si l'utilisateur a les autorisations nécessaires
+     * 
+     * @param int $pkCommentaire La clé primaire du commentaire à mettre à jour
+     * @param byte[] $video Le nouveau lien de la vidéo
+     * @return bool|null Retourne true si la mise à jour est réussie, sinon null
+     * @see base64_encode()
+     */
+    public function updateCommentaireVideo($pkCommentaire, $video)
+    {
+        $res = null;
+        if ($this->checkModifOK($pkCommentaire) == true) {
+            $query = "UPDATE tr_eau_user SET video = :vid WHERE PK_commentaire = :pk";
+            $encodedVideo = base64_encode($video);
+            $params = array('vid' => htmlspecialchars($encodedVideo), 'pk' => htmlspecialchars($pkCommentaire));
             $res = connexion::getInstance()->executeQuery($query, $params);
         }
         return $res;

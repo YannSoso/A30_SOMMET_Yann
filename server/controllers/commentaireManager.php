@@ -71,8 +71,17 @@ if (isset($_GET['action']) && $_GET['action'] == "getAll") {
  */
 if (isset($_POST['action']) && $_POST['action'] == "addCommentaire") {
 
-    if (isset($_POST['pfkEau'], $_POST['commentaire'], $_SESSION['user'])) {
-        $return = $wrkCommentaire->addCommentaire($_POST['commentaire'], $_POST['pfkEau'], $_SESSION['pkUser']);
+    if (isset($_POST['pfkEau'], $_SESSION['user']) && (isset($_POST['commentaire'])||isset($_POST['video']))) {
+        if (isset($_POST['video'])) {
+            $return = $wrkCommentaire->addCommentaireVideo($_POST['video'], $_POST['pfkEau'], $_SESSION['pkUser']);
+        } else if (isset($_POST['commentaire'])){
+            $return = $wrkCommentaire->addCommentaire($_POST['commentaire'], $_POST['pfkEau'], $_SESSION['pkUser']);
+        }else if (isset($_POST['commentaire']) && isset($_POST['video'])){
+            $return = $wrkCommentaire->addCommentaireVideo($_POST['video'], $_POST['pfkEau'], $_SESSION['pkUser']);
+            if ($return !== null) {
+                $return = $wrkCommentaire->addCommentaire($_POST['commentaire'], $_POST['pfkEau'], $_SESSION['pkUser']);
+            }
+        }
         if ($return !== null) {
             http_response_code(201);
             echo json_encode(['success' => true]);
@@ -96,8 +105,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
     if (isset($_PUT['action']) && $_PUT['action'] == "updateCommentaire") {
         $reponse = json_encode(['success' => false]);
         
-        if (isset($_PUT['commentaire'], $_PUT['pkCommentaire'])) {
-            $return = $wrkCommentaire->updateCommentaire($_PUT['pkCommentaire'], $_PUT['commentaire']);
+        if (isset($_PUT['commentaire']) && (isset($_PUT['pkCommentaire']) || isset($_PUT['video']))) {
+            if (isset($_PUT['video'])) {
+                $return = $wrkCommentaire->updateCommentaireVideo($_PUT['pkCommentaire'], $_PUT['video']);
+            } else if (isset($_PUT['commentaire'])){
+                $return = $wrkCommentaire->updateCommentaire($_PUT['pkCommentaire'], $_PUT['commentaire']);
+            }else if(isset($_PUT['commentaire']) && isset($_PUT['video'])){
+                $return = $wrkCommentaire->updateCommentaireVideo($_PUT['pkCommentaire'], $_PUT['video']);
+                if ($return !== null) {
+                    $return = $wrkCommentaire->updateCommentaire($_PUT['pkCommentaire'], $_PUT['commentaire']);
+                }
+            }
             if ($return !== null) {
                 http_response_code(200); 
                 $reponse = json_encode(['success' => true]);

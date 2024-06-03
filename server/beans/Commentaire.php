@@ -38,6 +38,13 @@ class Commentaire implements JsonSerializable
   private $commentaire;
 
   /**
+   * Variable représentant la vidéo
+   * @access private
+   * @var byte[]
+   */
+  private $video;
+
+  /**
    * Constructeur de la classe Commentaire
    *
    * @param int $pk_Commentaire PK du Commentaire
@@ -45,12 +52,13 @@ class Commentaire implements JsonSerializable
    * @param int $pfk_user PFK de l'utilisateur
    * @param string $commentaire commentaire
    */
-  public function __construct($pk_Commentaire, $pfk_eau, $pfk_user, $commentaire)
+  public function __construct($pk_Commentaire, $pfk_eau, $pfk_user, $commentaire, $video)
   {
     $this->pk_commentaire = $pk_Commentaire;
     $this->pfk_eau = $pfk_eau;
     $this->pfk_user = $pfk_user;
     $this->commentaire = $commentaire;
+    $this->video = $video;
   }
 
   /**
@@ -64,8 +72,8 @@ class Commentaire implements JsonSerializable
       'pk_Commentaire' => $this->getPkCommentaire(),
       'pfk_eau' => $this->getPfkEau(),
       'pfk_user' => $this->getPfkUser(),
-      'commentaire' => $this->getCommentaire()
-
+      'commentaire' => $this->getCommentaire(),
+      'video' => $this->getVideo()
     ];
   }
 
@@ -108,6 +116,16 @@ class Commentaire implements JsonSerializable
   public function getPfkUser()
   {
     return $this->pfk_user;
+  }
+
+  /**
+   * Fonction qui retourne la vidéo.
+   *
+   * @return byte[] La vidéo.
+   */
+  public function getVideo()
+  {
+    return $this->video;
   }
 }
 ?>
