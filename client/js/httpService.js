@@ -1,5 +1,5 @@
-var BASE_URL = "http://localhost/A30_SOMMET_YANN/server/controllers/";
-//var BASE_URL = "https://sommety.emf-informatique.ch/A30/server/controllers/";
+//var BASE_URL = "http://localhost/A30_SOMMET_YANN/server/controllers/";
+var BASE_URL = "https://sommety.emf-informatique.ch/A30/server/controllers/";
 /*
  *  Date :   16.06.2023 / V3.0
  * @author Jean-Claude Stritt / modif Yann Sommet
@@ -33,20 +33,23 @@ class HttpService {
 
   addEau(nomEau, description, image, successCallback, errorCallback) {
     $.ajax({
-      type: "POST",
-      dataType: "json",
-      url: BASE_URL + "eauManager.php",
-      data: 'action=addEau&nomEau=' + nomEau + '&description=' + description + '&image=' + image,
-      success: successCallback,
-      error: function(xhr, status, error) {
-        if (xhr.status === 401) {
-          errorCallback({ unauthorized: true });
-        } else {
-          errorCallback(xhr.responseJSON);
+        type: "POST",
+        dataType: "json",
+        url: BASE_URL + "eauManager.php",
+        data: 'action=addEau&nomEau=' + nomEau + '&description=' + description + '&image=' + image,
+        success: successCallback,
+        error: function(xhr, status, error) {
+            if (xhr.status === 401) {
+                errorCallback({ unauthorized: true });
+            } else {
+              console.log(xhr.status);
+                // Vérifier si xhr.responseJSON est défini
+                errorCallback(xhr.responseJSON || { message: "Erreur indéfinie" });
+            }
         }
-      }
     });
-  }
+}
+
 
   checkLogin(user, pwd, successCallback, errorCallback) {
     $.ajax({
@@ -100,12 +103,29 @@ class HttpService {
     });
   }
 
-  addCommentaire(pkEau, commentaire, video, successCallback, errorCallback) {
+  addCommentaire(pkEau, commentaire, successCallback, errorCallback) {
     $.ajax({
       type: "POST",
       dataType: "json",
       url: BASE_URL + "commentaireManager.php",
-      data: 'action=addCommentaire&commentaire=' + commentaire + '&pfkEau=' + pkEau+ '&video=' + video,
+      data: 'action=addCommentaire&commentaire=' + commentaire + '&pfkEau=' + pkEau,
+      success: successCallback,
+      error: function(xhr, status, error) {
+        if (xhr.status === 401) {
+          errorCallback({ unauthorized: true });
+        } else {
+          errorCallback(xhr.responseJSON);
+        }
+      }
+    });
+  }
+
+  addCommentaireVideo(pkEau, commentaire, video, successCallback, errorCallback) {
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: BASE_URL + "commentaireManager.php",
+      data: 'action=addCommentaireVideo&commentaire=' + commentaire + '&pfkEau=' + pkEau+ '&video=' + video,
       success: successCallback,
       error: function(xhr, status, error) {
         if (xhr.status === 401) {

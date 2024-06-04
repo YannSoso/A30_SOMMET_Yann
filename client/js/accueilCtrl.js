@@ -24,14 +24,15 @@ class AccueilCtrl {
         var img = canvas.toDataURL("image/png");
         this.wrk = new HttpService();
         this.wrk.addEau(nomEau, description, img, this.ajouterEau.bind(this), (error) => {
-          if (error.unauthorized === true) {
+          if (error && error.unauthorized === true) {
             alert("Vous n'avez pas les droits pour ajouter une eau");
           } else {
-            alert("Une erreur s'est produite lors de la mise à jour du commentaire : " + error.message);
+            alert("Une erreur s'est produite lors de l'ajout du commentaire : " + (error && error.message));
           }
         });
       });
     });
+
 
     $("#getStream").click(() => {
       var baliseVideo = `    <p><video autoplay id="videoPhoto" style="height: 300px; width: 200px;"></video></p>

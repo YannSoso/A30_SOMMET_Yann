@@ -16,18 +16,24 @@ class DetailEau {
 
         $("#ajoutCommentaireBtn").click(() => {
             var $valeurCom = document.getElementById('ajoutCommentaire').value;
-            if (($valeurCom !== null) && ($valeurCom !== "")) {
-                this.wrk.addCommentaire(idEau, $valeurCom, this.ajouterCommentaire.bind(this), (error) => {
-                    if (error.unauthorized === true) {
-                        alert("Vous devez être connecté pour accéder à cette option");
-                    } else {
-                        alert("Une erreur s'est produite lors de la mise à jour du commentaire : " + error.message);
+            if ($valeurCom !== null && $valeurCom !== "") {
+                this.wrk.addCommentaire(
+                    idEau, 
+                    $valeurCom, 
+                    this.ajouterCommentaire.bind(this), 
+                    (error) => {
+                        if (error && error.unauthorized === true) {
+                            alert("Vous devez être connecté pour accéder à cette option");
+                        } else {
+                            alert("Une erreur s'est produite lors de la mise à jour du commentaire : " + (error && error.message));
+                        }
                     }
-                });
+                );
             } else {
-                alert("Entré une valeur");
+                alert("Entrez une valeur");
             }
         });
+        
 
         $("#ajoutCommentaireVideo").click(() => {
             var videoHtml = `
@@ -64,7 +70,7 @@ class DetailEau {
 
         // Créer le div containerInfosEau et afficher la description dedans
         const containerInfosEau = $("#containerInfosEau");
-        if (description != null) {
+        if ((description != null) &&  (description != "")) {
             containerInfosEau.append("<p>Description : " + description + "</p>");
         } else {
             containerInfosEau.append("<p>Description : Pas encore de description</p>");
@@ -219,7 +225,7 @@ class DetailEau {
             var base64data = event.target.result;
             // Enregistrer le commentaire avec la vidéo et la valeur base64 dans la base de données
             var valeurCom = document.getElementById('ajoutCommentaire').value;
-            this.wrk.addCommentaire(idEau, valeurCom, base64data, this.ajouterCommentaire.bind(this), (error) => {
+            this.wrk.addCommentaireVideo(idEau, valeurCom, base64data, this.ajouterCommentaire.bind(this), (error) => {
                 if (error.unauthorized === true) {
                     alert("Vous devez être connecté pour accéder à cette option");
                 } else {

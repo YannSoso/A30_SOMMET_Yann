@@ -27,10 +27,7 @@ class EauDBManager
             $encodedImage = base64_encode($image);
             $base64DataWithHeader = "data:image/png;base64," . $encodedImage;
             $params = array('eau' => htmlspecialchars($nom), 'descr' => htmlspecialchars($description), 'image' => $base64DataWithHeader);
-            var_dump($params);
-            print_r($query);
             $res = connexion::getInstance()->ExecuteQuery($query, $params);
-            var_dump($res);
             return $res;
     }
 

@@ -7,9 +7,6 @@
 //Fonction ready de jQuery qui va être appelée lorsque la page est chargée
 $().ready(function () {
 
-    if("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("js/sw.js");
-    }
     // service et indexCtrl sont des variables globales qui doivent être accessible depuis partout => pas de mot clé devant ou window.xxx
     http = new HttpService();
     indexCtrl = new IndexCtrl();  // ctrl principal
