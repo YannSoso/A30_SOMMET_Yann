@@ -40,7 +40,49 @@ class AccueilCtrl {
       $('#containerPhoto').html(baliseVideo);
       var containerImg = `<p><img id="imageTag" width="200px" height="300px"></p>`;
       $('#target').html(containerImg);
+      var constraints = {
+        video: true
+      };
 
+      var theStream = null;
+
+      navigator.mediaDevices.getUserMedia(constraints)
+        .then(function (stream) {
+          var mediaControl = document.getElementById('videoPhoto');
+          if ('srcObject' in mediaControl) {
+            mediaControl.srcObject = stream;
+          } else if (navigator.mozGetUserMedia) {
+            mediaControl.mozSrcObject = stream;
+          } else {
+            mediaControl.src = (window.URL || window.webkitURL).createObjectURL(stream);
+          }
+          theStream = stream; // Stocker le flux de média pour une utilisation ultérieure
+        })
+        .catch(function (err) {
+          alert('Error: ' + err);
+        });
+
+      $("#containerPhoto").on("click", ".btnAjout", () => {
+        if (!('ImageCapture' in window)) {
+          alert('ImageCapture is not available');
+          return;
+        }
+
+        if (!theStream) {
+          alert('Grab the video stream first!');
+          return;
+        }
+
+        var theImageCapturer = new ImageCapture(theStream.getVideoTracks()[0]);
+
+        theImageCapturer.takePhoto()
+          .then(blob => {
+            var theImageTag = document.getElementById("imageTag");
+            theImageTag.src = URL.createObjectURL(blob);
+          })
+          .catch(err => alert('Error: ' + err));
+      }
+      );
     });
 
   }
