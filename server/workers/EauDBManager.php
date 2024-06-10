@@ -23,12 +23,12 @@ class EauDBManager
      */
     public function addEau($nom, $description, $image)
     {
-            $query = "INSERT INTO t_eau (PK_eau, nom, description, image) values(NULL, :eau, :descr, :image)";
-            $encodedImage = base64_encode($image);
-            $base64DataWithHeader = "data:image/png;base64," . $encodedImage;
-            $params = array('eau' => htmlspecialchars($nom), 'descr' => htmlspecialchars($description), 'image' => $base64DataWithHeader);
-            $res = connexion::getInstance()->ExecuteQuery($query, $params);
-            return $res;
+        $imageEncode = base64_encode($image);
+        $query = "INSERT INTO t_eau (PK_eau, nom, description, image) values(NULL, :eau, :descr, :image)";
+        $params = array('eau' => htmlspecialchars($nom), 'descr' => htmlspecialchars($description), 'image' => $imageEncode);
+        $res = connexion::getInstance()->ExecuteQuery($query, $params);
+        return $res;
+
     }
 
     /**
@@ -56,14 +56,14 @@ class EauDBManager
 
         $query = connexion::getInstance()->SelectQuery("SELECT * FROM t_eau", null);
         foreach ($query as $row) {
-            if (isset($row["image"])) {
-                $imageBase64 = base64_encode($row['image']);
-            } else {
-                $imageBase64 = null;
-            }
+            /*             if (isset($row["image"])) {
+                            $imageBase64 = base64_encode($row['image']);
+                        } else {
+                            $imageBase64 = null;
+                        } */
 
             // Créer l'objet Eau en incluant l'image convertie
-            $eau = new Eau($row['PK_eau'], $imageBase64, $row['nom'], $row['description']);
+            $eau = new Eau($row['PK_eau'], $row['image'], $row['nom'], $row['description']);
             array_push($liste, $eau);
         }
         $listeJSON = json_encode($liste);

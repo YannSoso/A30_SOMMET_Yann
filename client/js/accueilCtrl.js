@@ -19,20 +19,22 @@ class AccueilCtrl {
     $("#ajouterEau").click(() => {
       var nomEau = document.getElementById('nomAjouter').value;
       var description = document.getElementById('descriptionAjouter').value;
-
-      html2canvas(document.querySelector("#target")).then(canvas => {
-        var img = canvas.toDataURL("image/png");
-        this.wrk = new HttpService();
-        this.wrk.addEau(nomEau, description, img, this.ajouterEau.bind(this), (error) => {
+      var imageFile = $("#fileChooser")[0].files[0];
+      const formData = new FormData();
+      formData.append('action', 'addEau');
+      formData.append('nomEau', nomEau);
+      formData.append('description', description);
+      formData.append('file', imageFile);
+      this.wrk = new HttpService();
+        this.wrk.addEau(formData, this.ajouterEau.bind(this), (error) => {
           if (error && error.unauthorized === true) {
             alert("Vous n'avez pas les droits pour ajouter une eau");
           } else {
             alert("Une erreur s'est produite lors de l'ajout du commentaire : " + (error && error.message));
           }
         });
-      });
-    });
-
+    });  
+  
 
     $("#getStream").click(() => {
       var baliseVideo = `    <p><video autoplay id="videoPhoto" style="height: 300px; width: 200px;"></video></p>
@@ -133,7 +135,7 @@ class AccueilCtrl {
 
       if (eau.image != null) {
         // Ajoute l'image à l'élément div
-        eauDiv.append('<div><img class="imgEau" src="data:image/jpeg;base64,' + eau.image + '" alt="image-eau"></div>');
+        eauDiv.append('<div><img class="imgEau" src="data:image/jpg;base64,' + eau.image + '" loading="lazy" alt="image-eau"></div>');
       } else {
         eauDiv.append('<div><img class="imgEau" src="img/lodibidon.png" alt="image-eau"></div>')
       }
@@ -164,6 +166,7 @@ class AccueilCtrl {
   }
 
   ajouterEau(resultat) {
+    console.log(resultat.success);
     if (resultat.success === true) {
       alert("L'eau est ajouté");
       location.reload();

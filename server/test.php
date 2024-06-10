@@ -32,11 +32,10 @@ echo '<h1> TEST Fonctions Eau</h1>';
 $wrk = new EauDBManager();
 
 $imagePath = "../client/img/home.png";
-$imageContent = file_get_contents($imagePath);
+var_dump($imagePath);
+ //$results = $wrk->addEau("Evian", "C'est une eau de source", $imagePath);
 
-$results = $wrk->addEau("Evian", "C'est une eau de source", $imageContent);
-
-echo "Resultat addEau =>" . $results . "<br>";  
+//echo "Resultat addEau =>" . $results . "<br>";  
 
 /*
 //----------------------------------------------------TESTS Fonction worker login---------------------------------------

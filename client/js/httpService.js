@@ -31,12 +31,14 @@ class HttpService {
     });
   }
 
-  addEau(nomEau, description, image, successCallback, errorCallback) {
+  addEau(formData, successCallback,errorCallback) {
     $.ajax({
         type: "POST",
         dataType: "json",
         url: BASE_URL + "eauManager.php",
-        data: 'action=addEau&nomEau=' + nomEau + '&description=' + description + '&image=' + image,
+        data: formData,
+        processData: false,
+        contentType: false,
         success: successCallback,
         error: function(xhr, status, error) {
             if (xhr.status === 401) {

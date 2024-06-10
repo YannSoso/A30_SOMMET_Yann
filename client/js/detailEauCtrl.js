@@ -83,13 +83,23 @@ class DetailEau {
         if (data && data.length > 0) {
             data.forEach(commentaire => {
                 const idCommentaire = commentaire.pk_Commentaire;
-                const commentaireDiv = $("<div class='commentaireEau' id='" + idCommentaire + "Commentaire'>" +
-                    "<p class='clicParagraphe'>" + commentaire.commentaire + "</p>" +
-                    "<input type='text' class='commentaireInput hidden' id='" + idCommentaire + "Input' value='" + commentaire.commentaire + "'/>" +
-                    "<video width='320' height='240' controls> <source src='data:video/webm;base64," + commentaire.video + "' type='video/webm'> </video>" +
-                    "<button class='modifierBtn hidden' id='" + idCommentaire + "BtnModifier'>Modifier Commentaire</button>" +
-                    "<button class='effacerBtn hidden' id='" + idCommentaire + "BtnEffacer' data-commentaire-id='" + idCommentaire + "'>Effacer Commentaire</button>" +
-                    "</div>");
+                let commentaireDiv = "";
+                if (commentaire.video !== null) {
+                     commentaireDiv = $("<div class='commentaireEau' id='" + idCommentaire + "Commentaire'>" +
+                        "<p class='clicParagraphe'>" + commentaire.commentaire + "</p>" +
+                        "<input type='text' class='commentaireInput hidden' id='" + idCommentaire + "Input' value='" + commentaire.commentaire + "'/>" +
+                        "<video width='320' height='240' controls> <source src='data:video/webm;base64," + commentaire.video + "' type='video/webm'> </video>" +
+                        "<button class='modifierBtn hidden' id='" + idCommentaire + "BtnModifier'>Modifier Commentaire</button>" +
+                        "<button class='effacerBtn hidden' id='" + idCommentaire + "BtnEffacer' data-commentaire-id='" + idCommentaire + "'>Effacer Commentaire</button>" +
+                        "</div>");
+                } else {
+                     commentaireDiv = $("<div class='commentaireEau' id='" + idCommentaire + "Commentaire'>" +
+                        "<p class='clicParagraphe'>" + commentaire.commentaire + "</p>" +
+                        "<input type='text' class='commentaireInput hidden' id='" + idCommentaire + "Input' value='" + commentaire.commentaire + "'/>" +
+                        "<button class='modifierBtn hidden' id='" + idCommentaire + "BtnModifier'>Modifier Commentaire</button>" +
+                        "<button class='effacerBtn hidden' id='" + idCommentaire + "BtnEffacer' data-commentaire-id='" + idCommentaire + "'>Effacer Commentaire</button>" +
+                        "</div>");
+                }
 
 
 

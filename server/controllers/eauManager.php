@@ -44,9 +44,11 @@ if (isset($_POST["action"]) && $_POST['action'] == "addEau") {
     
     $reponse = json_encode(['success' => false]);
 
-    if (isset($_POST['nomEau'], $_SESSION['estAdmin'], $_POST['image'])) {
+    if (isset($_POST['nomEau'], $_SESSION['estAdmin'], $_FILES['file'])) {
         if ($_SESSION['estAdmin'] == 1) {
-            $return = $wrk->addEau($_POST['nomEau'], $_POST['description'], $_POST['image']);
+            $file = $_FILES['file']['tmp_name'];
+            $content = file_get_contents($file);
+            $return = $wrk->addEau($_POST['nomEau'], $_POST['description'], $content);
             if ($return !== null) {
                 http_response_code(201);
                 $reponse = json_encode(['success' => true]);
