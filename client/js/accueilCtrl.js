@@ -102,6 +102,7 @@ class AccueilCtrl {
       reader.addEventListener('load', () => {
         var img = document.createElement('img');
         img.src = reader.result;
+        img.classList.add('imgChooser');
         target.appendChild(img);
       });
       reader.readAsDataURL(file);
