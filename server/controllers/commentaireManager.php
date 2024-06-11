@@ -91,16 +91,8 @@ if (isset($_POST['action']) && $_POST['action'] == "addCommentaireVideo") {
         // Initialisation de la variable de retour
         $return = null;
 
-        // Cas où il y a une vidéo à ajouter
         if (isset($_POST['video'])) {
             $return = $wrkCommentaire->addCommentaireVideo($_POST['video'], $_POST['pfkEau'], $_SESSION['pkUser']);
-        }
-        // Cas où il y a à la fois une vidéo et un commentaire à ajouter
-        else if (isset($_POST['commentaire']) && isset($_POST['video'])) {
-            $return = $wrkCommentaire->addCommentaireVideo($_POST['video'], $_POST['pfkEau'], $_SESSION['pkUser']);
-            if ($return !== null) {
-                $return = $wrkCommentaire->addCommentaire($_POST['commentaire'], $_POST['pfkEau'], $_SESSION['pkUser']);
-            }
         }
 
         // Vérification du résultat des opérations d'ajout

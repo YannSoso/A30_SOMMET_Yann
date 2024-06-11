@@ -56,13 +56,7 @@ class EauDBManager
 
         $query = connexion::getInstance()->SelectQuery("SELECT * FROM t_eau", null);
         foreach ($query as $row) {
-            /*             if (isset($row["image"])) {
-                            $imageBase64 = base64_encode($row['image']);
-                        } else {
-                            $imageBase64 = null;
-                        } */
 
-            // Créer l'objet Eau en incluant l'image convertie
             $eau = new Eau($row['PK_eau'], $row['image'], $row['nom'], $row['description']);
             array_push($liste, $eau);
         }

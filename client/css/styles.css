@@ -11,22 +11,25 @@
 }
 
 body {
-  background-color: #82c4e9; /* Nouvelle couleur de fond */
+  background-color: #82c4e9;
+  /* Nouvelle couleur de fond */
 }
 
 .header {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding: 10px;
   margin-bottom: 2%;
   margin-top: 2%;
 }
 
-#logo, #logo1, #logo2 {
+#logo,
+#logo1,
+#logo2 {
   position: absolute;
-  width: 5%; 
-  height: auto; 
+  width: 5%;
+  height: auto;
 }
 
 .logo {
@@ -42,7 +45,8 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background: #014b7c; /* Nouvelle couleur de fond */
+  background: #014b7c;
+  /* Nouvelle couleur de fond */
   background-position: center center;
   background-size: 100% auto;
   background-repeat: no-repeat;
@@ -98,24 +102,20 @@ body {
   align-items: center;
   margin-bottom: 5%;
   padding: 5%;
-  background: #fff; /* Nouvelle couleur de fond */
+  background: #fff;
+  /* Nouvelle couleur de fond */
   border-radius: 50px;
   width: 40%;
 }
 
 .containerEauMarque:hover {
-  background: #d3d3d3; /* Nouvelle couleur de fond au survol */
+  background: #d3d3d3;
+  /* Nouvelle couleur de fond au survol */
 }
 
 .eauDiv img {
   width: auto;
   height: 300px;
-}
-@media screen and (max-width: 768px) {
-  .eauDiv img {
-    width: auto;
-    height: 200px;
-  }
 }
 
 footer {
@@ -180,11 +180,11 @@ footer {
 }
 
 .containerTitre {
-  background-image: #2980b9; /* Nouvelle couleur de fond */
+  background-image: #2980b9;
   color: #fff;
-  padding: 10px;
   text-align: center;
   border-radius: 4px 4px 0 0;
+  margin-bottom: 2%;
 }
 
 .titre {
@@ -194,9 +194,9 @@ footer {
 .conteneurImage {
   margin-top: 20px;
   text-align: center;
-}s
+}
 
-.imgEau {
+s .imgEau {
   max-width: 100%;
   border-radius: 4px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -221,13 +221,6 @@ footer {
   overflow: hidden;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 10px;
-}
-
 .float {
   background-color: #3498db;
   color: #fff;
@@ -239,7 +232,8 @@ footer {
 .float:hover {
   background-color: #2980b9;
 }
-#login{
+
+#login {
   padding: 10px 20px;
   background-color: #014b7c;
   color: #fff;
@@ -247,17 +241,22 @@ footer {
   border-radius: 4px;
   cursor: pointer;
 }
+
 /* Ajout de styles pour aligner le bouton à droite */
-.header  .boutonLogin{
+.header .boutonLogin {
   margin-left: auto;
 }
 
-#home2, #home1{
-  width: 30px; /* Ajuster la taille de l'icône selon vos besoins */
+#home2,
+#home1 {
+  width: 30px;
+  /* Ajuster la taille de l'icône selon vos besoins */
   height: 30px;
   display: block;
-  margin-left: auto; /* Pour aligner l'icône à droite */
-  margin-right: 20px; /* Ajouter une marge à droite pour l'espacement */
+  margin-left: auto;
+  /* Pour aligner l'icône à droite */
+  margin-right: 20px;
+  /* Ajouter une marge à droite pour l'espacement */
 }
 
 .hommeBtn {
@@ -266,11 +265,12 @@ footer {
   max-height: 100%;
 }
 
-.divImgEau{
+.divImgEau {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .divImgEau img {
   width: auto;
   height: 300px;
@@ -284,7 +284,8 @@ footer {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
+  align-items: center;
 }
 
 #ajouterEau h2 {
@@ -322,8 +323,10 @@ footer {
 }
 
 #DivAjouterEau {
-  background-color: #f0f0f0; /* Gris clair */
-  color: #333; /* Gris foncé */
+  background-color: #f0f0f0;
+  /* Gris clair */
+  color: #333;
+  /* Gris foncé */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -335,21 +338,26 @@ footer {
 }
 
 #DivAjouterEau h2 {
-  color: #3498db; /* Bleu clair */
+  color: #3498db;
+  /* Bleu clair */
 }
 
-#nomAjouter, #descriptionAjouter {
+#nomAjouter,
+#descriptionAjouter {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc; /* Gris clair pour la bordure */
+  border: 1px solid #ccc;
+  /* Gris clair pour la bordure */
   border-radius: 5px;
   box-sizing: border-box;
 }
 
 #ajouterEau {
-  background-color: #3498db; /* Bleu clair pour le bouton */
-  color: #fff; /* Blanc pour le texte du bouton */
+  background-color: #3498db;
+  /* Bleu clair pour le bouton */
+  color: #fff;
+  /* Blanc pour le texte du bouton */
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -358,43 +366,49 @@ footer {
 }
 
 #ajouterEau:hover {
-  background-color: #2980b9; /* Bleu légèrement plus foncé au survol */
+  background-color: #2980b9;
+  /* Bleu légèrement plus foncé au survol */
 }
 
 #ajouterCommentaire {
-  background-color: #f5f5f5; /* Gris clair pour le fond */
-  border: 1px solid #ccc; /* Bordure grise */
-  border-radius: 8px; /* Coins arrondis */
+  background-color: #f5f5f5;
+  /* Gris clair pour le fond */
+  border: 1px solid #ccc;
+  /* Bordure grise */
+  border-radius: 8px;
+  /* Coins arrondis */
   padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-#ajouterCommentaire, #commentaireVideo{
+#ajouterCommentaire,
+#commentaireVideo {
   display: flex;
   flex-direction: column;
 }
 
 .addCommentaire {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
   width: 100%;
   gap: 10px;
 }
 
 #ajoutCommentaire {
-  flex: 1; /* Prend autant d'espace que possible */
+  flex: 1;
+  /* Prend autant d'espace que possible */
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px; 
+  border-radius: 4px;
 }
 
-.btnAjout { 
-  background-color: #3498db; 
-  color: #fff; 
-  padding: 8px 16px; 
+.btnAjout {
+  background-color: #3498db;
+  color: #fff;
+  padding: 8px 16px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -403,25 +417,27 @@ footer {
 
 
 .btnAjout:hover {
-  background-color: #2980b9; 
+  background-color: #2980b9;
 }
 
 
 .commentaireEau {
-  background-color: #f5f5f5; 
-  border: 1px solid #ccc; 
-  border-radius: 8px; 
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   margin-bottom: 15px;
   padding: 10px;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 .clicParagraphe {
   margin-bottom: 10px;
 }
 
-.commentaireInput, .modifierBtn, .effacerBtn {
+.commentaireInput,
+.modifierBtn,
+.effacerBtn {
   margin-top: 10px;
 }
 
@@ -431,18 +447,20 @@ footer {
   border-radius: 4px;
 }
 
-.modifierBtn, .effacerBtn {
-  background-color: #3498db; 
+.modifierBtn,
+.effacerBtn {
+  background-color: #3498db;
   color: #fff;
-  padding: 8px 16px; 
+  padding: 8px 16px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.modifierBtn:hover, .effacerBtn:hover {
-  background-color: #2980b9; 
+.modifierBtn:hover,
+.effacerBtn:hover {
+  background-color: #2980b9;
 }
 
 .btn-file-container {
@@ -454,7 +472,7 @@ footer {
 .btn-file {
   position: relative;
   top: 0;
-  left: 0; 
+  left: 0;
   margin: 0;
   padding: 10px 20px;
   font-size: 16px;
@@ -491,41 +509,110 @@ input[type="file"] {
   justify-content: center;
 }
 
-.popup {
-  display: none; /* Caché par défaut */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  width: 300px;
-  text-align: center;
+/* 
+@media screen and (max-width: 850px) {
+  .eauDiv img {
+    width: auto;
+    height: 100px;
+  }
+} */
+
+@media screen and (max-width: 1200px) {
+  .containerEauMarque {
+    width: 60%;
+  }
+
+  .eauDiv img {
+    height: 250px;
+  }
+
+  .titre {
+    font-size: 35px;
+  }
 }
-.popup-overlay {
-  display: none; /* Caché par défaut */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
+
+@media screen and (max-width: 992px) {
+  .containerEauMarque {
+    width: 70%;
+  }
+
+  .eauDiv img {
+    height: 200px;
+  }
+
+  .titre {
+    font-size: 30px;
+  }
 }
-.popup.show,
-.popup-overlay.show {
-  display: block; /* Afficher le popup */
+
+@media screen and (max-width: 768px) {
+
+  .containerTitre {
+    height: 50vh;
+  }
+
+  .titre {
+    font-size: 25px;
+  }
+
+  .containerEauMarque {
+    width: 80%;
+    flex-direction: column;
+    padding: 10%;
+  }
+
+  .eauDiv img {
+    height: 150px;
+  }
+
+  .login {
+    width: 80%;
+  }
+
+  #ajouterEau {
+    width: 90%;
+  }
 }
-.popup button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  cursor: pointer;
+
+@media screen and (max-width: 576px) {
+  .addCommentaire {
+    flex-direction: column;
+  }
+
+  .containerTitre {
+    height: 40vh;
+  }
+
+  .titre {
+    font-size: 20px;
+  }
+
+  .containerEauMarque {
+    width: 90%;
+  }
+
+  .eauDiv img {
+    height: 100px;
+  }
+
+  .login {
+    width: 100%;
+  }
+
+  #ajouterEau {
+    width: 100%;
+  }
+
+  .float {
+    padding: 8px;
+    font-size: 16px;
+  }
 }
-.popup button:hover {
-  background-color: #0056b3;
+
+@media screen and (max-width: 450px) {
+  #home2,
+  #home1 {
+    width: 20px;
+    height: 20px;
+  }
 }
